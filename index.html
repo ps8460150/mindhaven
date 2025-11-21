@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>MindHaven Demo</title></head>
+<body>
+<h2>MindHaven Demo</h2>
+<input id='msg'><button onclick='send()'>Send</button>
+<p id='res'></p>
+<script>
+async function send(){
+  let txt=document.getElementById('msg').value;
+  let r=await fetch('/api/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({message:txt})
+  });
+  let j=await r.json();
+  document.getElementById('res').innerText=j.reply;
+}
+</script>
+</body>
+</html>
